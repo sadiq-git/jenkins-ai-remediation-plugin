@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    AI Remediation Plugin: Auto-diagnose pipeline failures using LangChain4j and create GitHub PRs with fixes.
+</div>

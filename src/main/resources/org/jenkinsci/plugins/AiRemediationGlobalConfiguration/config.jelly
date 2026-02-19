@@ -1,0 +1,14 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+    <f:section title="AI Remediation Plugin">
+        <f:entry title="Groq API Credentials ID" field="groqCredentialsId" description="Enter the ID you created in the Credentials screen (e.g. groq-api-key)">
+            <f:textbox/>
+        </f:entry>
+        <f:entry title="Groq Model Name" field="modelName">
+            <f:textbox default="llama-3.3-70b-versatile"/>
+        </f:entry>
+        <f:entry title="GitHub PR Credentials ID" field="githubCredentialsId" description="Enter the ID you created in the Credentials screen (e.g. github-pat)">
+            <f:textbox/>
+        </f:entry>
+    </f:section>
+</j:jelly>

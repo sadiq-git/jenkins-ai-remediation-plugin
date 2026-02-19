@@ -1,0 +1,7 @@
+<!-- File: src/main/resources/org/jenkinsci/plugins/AiDiagnosticAction/summary.jelly -->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:t="/lib/hudson">
+    <t:summary icon="symbol-sparkles plugin-ionicons-api">
+        <b><a href="${it.urlName}">Review AI Fix</a></b>: The diagnostic agent has formulated a patch.
+    </t:summary>
+</j:jelly>

@@ -1,0 +1,62 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:l="/lib/layout" xmlns:f="/lib/form" xmlns:st="jelly:stapler">
+    <l:layout title="Review AI Fix">
+        <l:side-panel>
+            <st:include page="sidepanel.jelly" it="${it.run}" />
+        </l:side-panel>
+        <l:main-panel>
+            <h1>Automated Remediation Dashboard</h1>
+            
+            <div style="background: #f4f6f8; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #007bff;">
+                <h3>AI Diagnostic Output</h3>
+                <p style="white-space: pre-wrap;">${it.aiExplanation}</p>
+            </div>
+
+            <h3>Target Modification: <code>${it.filePath}</code></h3>
+            
+            <!-- Safe variable transfer via hidden textareas to prevent Jelly syntax breaks in JS -->
+            <textarea id="originalContentText" style="display:none;">${it.originalContent}</textarea>
+            <textarea id="newContentText" style="display:none;">${it.newContent}</textarea>
+            
+            <!-- Diff2Html integration -->
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff/dist/diff.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html.min.js"></script>
+
+            <div id="diff-ui" style="margin-bottom: 30px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const originalText = document.getElementById('originalContentText').value;
+                    const newText = document.getElementById('newContentText').value;
+                    
+                    const diffStr = Diff.createTwoFilesPatch(
+                        "${it.filePath}",
+                        "${it.filePath}",
+                        originalText || "",
+                        newText || ""
+                    );
+                    
+                    const diffHtml = Diff2Html.html(diffStr, {
+                        drawFileList: false,
+                        matching: 'lines',
+                        outputFormat: 'side-by-side'
+                    });
+                    
+                    document.getElementById('diff-ui').innerHTML = diffHtml;
+                });
+            </script>
+
+            <!-- Action is 'submitFix' (Stapler maps this to doSubmitFix) -->
+            <f:form action="submitFix" method="post" name="remediationSubmit">
+                <f:entry>
+                    <input type="hidden" name="approved" value="true" />
+                    <!-- UPDATED LABEL -->
+                    <button type="submit" class="jenkins-button jenkins-button--primary" style="font-weight: bold;">
+                        Create Repository &amp; Push Fix
+                    </button>
+                </f:entry>
+            </f:form>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>
