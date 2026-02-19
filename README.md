@@ -9,14 +9,14 @@ This Jenkins plugin automatically intercepts pipeline failures, analyzes the bui
 ```mermaid
 graph TD
     %% Nodes
-    Build[❌ Pipeline Failure]
+    Build[Pipeline Failure]
     Listener(AiRemediationListener)
     Sanitizer{LogSanitizer}
     AI_Service[AiDiagnosticService]
     LLM[Groq API / Llama 3]
-    Dashboard[👀 Review Dashboard UI]
+    Dashboard[Review Dashboard UI]
     GitService[GitHubRemediationService]
-    GitHub[((GitHub))]
+    GitHub[GitHub]
 
     %% Edge Connections
     Build -->|Triggers| Listener
@@ -27,12 +27,12 @@ graph TD
     AI_Service -->|Fix & Explanation| Listener
     Listener -->|Attach Action| Dashboard
     
-    subgraph Human_in_the_Loop [Human in the Loop]
-        Dashboard -- Displays Diff --> User((Developer))
-        User -- Clicks 'Create Repo & Push' --> GitService
+    subgraph Human_in_the_Loop[Human in the Loop]
+        Dashboard -->|Displays Diff| User((Developer))
+        User -->|Clicks Create Repo Push| GitService
     end
 
-    GitService -->|Create Repo & Commit| GitHub
+    GitService -->|Create Repo Commit| GitHub
     GitHub -->|Return New Repo URL| Dashboard
     
     %% Styling
