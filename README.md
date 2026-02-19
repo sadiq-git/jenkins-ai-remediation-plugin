@@ -6,6 +6,7 @@ This Jenkins plugin automatically intercepts pipeline failures, analyzes the bui
 
 🧠 Logical Workflow
 
+```mermaid
 graph TD
     %% Nodes
     Build[❌ Pipeline Failure]
@@ -39,7 +40,7 @@ graph TD
     style LLM fill:#e6f3ff,stroke:#333,stroke-width:2px
     style GitHub fill:#f0f0f0,stroke:#333,stroke-width:2px
     style Dashboard fill:#e6ffe6,stroke:#333,stroke-width:2px
-
+```
 
 ✨ Features
 
