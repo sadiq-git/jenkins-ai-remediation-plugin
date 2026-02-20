@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!-- UPDATED: Bumped Parent POM to 5.2 for Jakarta EE / Jenkins 2.479+ support -->
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
@@ -82,6 +81,30 @@
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>git</artifactId>
             <version>5.2.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Fix: Force newer SSH Credentials to resolve Mina SSHD conflict during test -->
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>ssh-credentials</artifactId>
+            <version>337.v395d2403ccd4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Fix: Force newer Structs plugin to resolve git-client conflict during test -->
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>structs</artifactId>
+            <version>325.vcb_307d2a_2782</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Fix: Force newer Folders plugin to resolve workflow-multibranch conflict during test -->
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>cloudbees-folder</artifactId>
+            <version>6.714.v79e858ef76a_2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
